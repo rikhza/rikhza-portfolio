@@ -56,10 +56,8 @@ export default function BlogSection() {
 		const fetchMediumArticles = async () => {
 			try {
 				const items = await getMediumPosts();
-				console.log("Medium API Response:", items);
 
-				if (items.length === 0) {
-					console.log("No articles found");
+				if (!items || items.length === 0) {
 					setArticles([]);
 					return;
 				}
@@ -101,9 +99,9 @@ export default function BlogSection() {
 						)} min read`,
 					};
 				});
+
 				setArticles(formattedArticles);
 			} catch (err) {
-				console.error("Error fetching Medium articles:", err);
 				setError(
 					err instanceof Error
 						? err.message
